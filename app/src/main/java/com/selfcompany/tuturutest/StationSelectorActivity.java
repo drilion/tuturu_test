@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -47,6 +48,7 @@ public class StationSelectorActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     RecyclerView recyclerView;
+    SearchView searchView;
 
     Realm realm = Realm.getDefaultInstance();
     RealmResults<? extends RealmObject> cities;
@@ -95,20 +97,8 @@ public class StationSelectorActivity extends AppCompatActivity {
         recyclerView.setAdapter(new MyExpandableRecyclerViewAdapter(this,
                 adapterCities, itemClickListener));
 
-        final SearchView searchView = (SearchView) findViewById(R.id.search_view);
+        searchView = (SearchView) findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(onQueryTextListener);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     //слушатель кликов и долгих нажатий по элментам развернутого списка (станции)
@@ -134,6 +124,7 @@ public class StationSelectorActivity extends AppCompatActivity {
     private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
+            onQueryTextChange(query);
             return false;
         }
 
@@ -199,5 +190,38 @@ public class StationSelectorActivity extends AppCompatActivity {
             ));
         }
         return result;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("searchQuery", searchView.getQuery().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(getApplication())
+                .name("tuturu.realm")
+                .build();
+
+        Realm.setDefaultConfiguration(realmConfiguration);
+
+        realm = Realm.getDefaultInstance();
+
+        searchView.setQuery(savedInstanceState.getString("searchQuery"), true);
     }
 }
