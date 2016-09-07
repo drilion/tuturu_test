@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Tutu.ru Test</string>
+    <string name="app_name_menu">Tutu.ru\nTest</string>
+    <string name="preference_file_key">com.selfcompany.tuturutest.PREFERENCE_FILE_KEY</string>
+    <string name="preference_update_date">PREFERENCE_UPDATE_DATE</string>
+    <string name="schedule">Расписание</string>
+    <string name="about">О приложении</string>
+    <string name="from_station_hint">Станция отправления</string>
+    <string name="to_station_hint">Станция прибытия</string>
+    <string name="date_picker_hint">Дата отправления</string>
+    <string name="schedule_name">Расписание</string>
+    <string name="about_name">О приложении</string>
+    <string name="station_selector_name">Выберите станцию</string>
+    <string name="station_details_name">Подробно о станции</string>
+    <string name="copyright">Копирайт</string>
+    <string name="version_string">Версия: %1$s</string>
+    <string name="station_title">Станция: %1$s</string>
+    <string name="district_title">Район: %1$s</string>
+    <string name="region_title">Регион: %1$s</string>
+    <string name="city_title">Город: %1$s</string>
+    <string name="country_title">Страна: %1$s</string>
+    <string name="location">Локация: %1$s</string>
+    <string name="loc_url"><u>Посмотреть</u></string>
+    <string name="item_station_details">%1$s, %2$s</string>
+    <string name="from_error">Выберите станцию отправления</string>
+    <string name="to_error">Выберите станцию прибытия</string>
+    <string name="date_picker_error">Выберите дату</string>
+    <string name="search_hint">Поиск</string>
+    <string name="geo_uri">geo:%1$s,%2$s</string>
+</resources>
